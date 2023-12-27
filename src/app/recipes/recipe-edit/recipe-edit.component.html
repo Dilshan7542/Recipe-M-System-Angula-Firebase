@@ -1,0 +1,55 @@
+<div class="row " style="margin-left: 10px">
+  <form class="row col-xs-12" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+    <div class="col-xs-12">
+    <div class="form-group">
+      <button class="btn btn-success" [disabled]="!recipeForm.valid">save</button>
+      <button type="button" class="btn btn-danger" (click)="onCancel()" >cancel</button>
+    </div>
+    </div>
+    </div>
+      <div class="row">
+        <div class="col-xs-12 form-group">
+            <label for="name"> Name
+              <input type="text" id="name" class="form-control" formControlName="name">
+            </label>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="image"> Image URL
+          <input type="text" id="image" class="form-control" formControlName="imagePath" #imageRef>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <img [src]="imageRef.value" alt="">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="desc"> Description
+          <textarea type="text" id="desc" class="form-control" rows="6" formControlName="description"></textarea>
+        </label>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px" formArrayName="ingredients">
+     <div *ngFor="let ingredient of recipeControl;let i=index"  [formGroupName]="i">
+      <div class="col-xs-8">
+      <input type="text" class="form-control" formControlName="name">
+      </div>
+      <div class="col-xs-2">
+        <input type="number" class="form-control" formControlName="amount">
+      </div>
+      <div class="col-xs-2">
+        <button class="btn btn-danger" type="button" (click)="onRemoveIngredient(i)">X</button>
+      </div>
+     </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12"> <button type="button" class="btn btn-success" (click)="addOnIngredient()">Add Ingredient</button></div>
+    </div>
+  </form>
+</div>
